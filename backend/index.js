@@ -14,7 +14,7 @@ var data = [
             "7865956784",
             "9876543210"
         ],
-        "dob": "5/10/1999"
+        "dob": "05-10-1999"
     },
     {
         "name": "nitin",
@@ -26,7 +26,7 @@ var data = [
             "7865956765",
             "9876546510"
         ],
-        "dob": "6/2/1999"
+        "dob": "08-09-1999"
     },
     {
         "name": "muskaan",
@@ -38,7 +38,7 @@ var data = [
             "7865336765",
             "9876534510"
         ],
-        "dob": "6/2/1999"
+        "dob": "06-02-1999"
     }
 ]
 
@@ -103,6 +103,20 @@ app.get("/getByContact/:contact",function(req,res){
     res.send("No contact with this contact number");
 })
 
+app.get("/getByDOB/:dob",function(req,res){
+    console.log("getting data by DOB");
+    var result=[];
+    data.map(d => {
+        if(d.dob == req.params.dob)
+        {
+            result.push(d);
+        }
+    })
+    if(result.length==0){
+        res.send("No contact with this dob");
+    }
+    res.send(result);
+})
 
 
 app.listen(8082,()=>{
