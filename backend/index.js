@@ -90,6 +90,19 @@ app.get("/getByEmail/:email",function(req,res){
     res.send("No contact with this email id");
 })
 
+app.get("/getByContact/:contact",function(req,res){
+    console.log("getting data by contact");
+    data.map(d => {
+        return d.contact.map(c => {
+            if(c == req.params.contact){
+                res.send(d);
+            }
+        })
+
+    })
+    res.send("No contact with this contact number");
+})
+
 
 
 app.listen(8082,()=>{
