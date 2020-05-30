@@ -12,6 +12,7 @@ class Main extends Component{
         };
     }
 
+    //fetching all contacts
     componentDidMount(){
         console.log('did mount');
         fetch('http://localhost:8082/all')
@@ -20,11 +21,14 @@ class Main extends Component{
             console.log(JSON.stringify(res));
             this.setState({data:res})
         })
+
+        //making search data empty
         this.setState({
             searchData: []
         })
     }
 
+    //adding new contact(only one email-id and one contact-number for now)
     addContact=(v,event) =>{
         event.preventDefault();
         console.log(v);
@@ -62,8 +66,11 @@ class Main extends Component{
         // })
     }
 
+    //seraching contacts
     search=(v,event)=>{
         event.preventDefault();
+
+        //seraching contacts by name
         fetch(`http://localhost:8082/getByName/${v.val}`)
         .then(res=>res.json())
         .then(res=>{
@@ -71,6 +78,7 @@ class Main extends Component{
             this.setState({searchData:res});
         })
 
+        //seraching contact by email
         fetch(`http://localhost:8082/getByEmail/${v.val}`)
         .then(res=>res.json())
         .then(res=>{
@@ -82,6 +90,7 @@ class Main extends Component{
             }
         })
 
+        //seraching contact by contact-number
         fetch(`http://localhost:8082/getByContact/${v.val}`)
         .then(res=>res.json())
         .then(res=>{
@@ -93,7 +102,9 @@ class Main extends Component{
             }
         })
     }
+
     render(){
+        //designing all contacts data
         var data= this.state.data;
         var result=data.map(d=>{
             return(
@@ -108,6 +119,8 @@ class Main extends Component{
                 </Card>
             )
         })
+
+        //designing searched contact's data
         data=this.state.searchData;
         var searchedData=data.map(d=>{
             return(
@@ -122,6 +135,8 @@ class Main extends Component{
                 </Card>
             )
         })
+
+        //rendering (without any css)
         return(
             <div>
                 <Search search={this.search} />

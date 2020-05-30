@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
+//hardcoded data
 var data = [
     {
         "name": "muskaan",
@@ -57,15 +58,18 @@ app.use("*",(req,res,next)=>{
     next();
 })
 
+//root path
 app.get("",(req,res)=>{
     res.send("Phone-Book-Web-App");
 })
 
+//get all contact details
 app.get("/all",(req,res)=>{
     console.log("getting all data");
     res.send(data);
 })
 
+//get all contacts by name
 app.get("/getByName/:name",(req,res)=>{
     console.log("getting data by name");
     console.log(req.params.name);
@@ -82,6 +86,7 @@ app.get("/getByName/:name",(req,res)=>{
     res.send(result);
 })
 
+//get contact by email(unique)
 app.get("/getByEmail/:email",(req,res)=>{
     console.log("getting data by email");
     data.map(d => {
@@ -96,6 +101,7 @@ app.get("/getByEmail/:email",(req,res)=>{
     res.send("EMPTY");
 })
 
+//get contact by contact-number(unique)
 app.get("/getByContact/:contact",(req,res)=>{
     console.log("getting data by contact");
     data.map(d => {
@@ -110,6 +116,7 @@ app.get("/getByContact/:contact",(req,res)=>{
     res.send("EMPTY");
 })
 
+//get contacts by dob(Not allowed -> 00-00-0000)
 app.get("/getByDOB/:dob",(req,res)=>{
     console.log("getting data by DOB");
     var result=[];
@@ -125,6 +132,7 @@ app.get("/getByDOB/:dob",(req,res)=>{
     res.send(result);
 })
 
+//add new contact (validations not implemented yet)
 app.post("/add",function(req,res){
     console.log(req.body);
     data.push(req.body);
