@@ -63,16 +63,33 @@ app.get("/all",function(req,res){
 })
 
 app.get("/getByName/:name",function(req,res){
-    console.log("getting all data");
-    const result = data.map(d => {
+    console.log("getting data by name");
+    var result=[];
+    data.map(d => {
         if(d.name == req.params.name)
         {
-            return d;
+            result.push(d);
         }
-
     })
+    if(result.length==0){
+        res.send("No contact with this name");
+    }
     res.send(result);
 })
+
+app.get("/getByEmail/:email",function(req,res){
+    console.log("getting data by email");
+    data.map(d => {
+        return d.email.map(email => {
+            if(email == req.params.email){
+                res.send(d);
+            }
+        })
+
+    })
+    res.send("No contact with this email id");
+})
+
 
 
 app.listen(8082,()=>{
