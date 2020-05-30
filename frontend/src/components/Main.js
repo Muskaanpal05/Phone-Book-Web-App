@@ -6,20 +6,19 @@ class Main extends Component{
     constructor(props){
         super(props);
         this.state={
-            data:  [
-                {
-                    name: "muskaan",
-                    email: [
-                        "abc@gmail.com",
-                        "xyz@gmail.com"
-                    ],
-                    contact: [
-                        "7865956784",
-                        "9876543210"
-                    ],
-                    dob: "05-10-1999"
-                }]
+            data:  []
         };
+    }
+
+    componentDidMount(){
+        console.log('did mount');
+        fetch('http://localhost:8082/all')
+        .then(res=>res.json())
+        .then(res=>{
+            console.log(JSON.stringify(res));
+            this.setState({data:res})
+        })
+
     }
 
     addContact=(v,event) =>{
@@ -31,11 +30,32 @@ class Main extends Component{
             contact:[v.contact],
             dob:v.dob
         }
-        var data1= this.state.data;
-        data1.push(newData);
-        this.setState({
-            data: data1
-        })
+
+        fetch('http://localhost:8082/add',{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(newData)
+            })
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+                if(res.valid){
+                    var data1= this.state.data;
+                    data1.push(newData);
+                    this.setState({
+                        data: data1
+                    })
+                }
+                else{
+                    alert('Couldn\'t able to add a contact');
+                }
+            })
+
+        // var data1= this.state.data;
+        // data1.push(newData);
+        // this.setState({
+        //     data: data1
+        // })
     }
     render(){
         var data= this.state.data;
