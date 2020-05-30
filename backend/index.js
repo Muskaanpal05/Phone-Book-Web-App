@@ -72,7 +72,7 @@ app.get("/getByName/:name",function(req,res){
         }
     })
     if(result.length==0){
-        res.send("No contact with this name");
+        res.send({"Response":"No contact with this name"});
     }
     res.send(result);
 })
@@ -87,7 +87,7 @@ app.get("/getByEmail/:email",function(req,res){
         })
 
     })
-    res.send("No contact with this email id");
+    res.send({"Response":"No contact with this email"});
 })
 
 app.get("/getByContact/:contact",function(req,res){
@@ -100,7 +100,7 @@ app.get("/getByContact/:contact",function(req,res){
         })
 
     })
-    res.send("No contact with this contact number");
+    res.send({"Response":"No contact with this contact number"});
 })
 
 app.get("/getByDOB/:dob",function(req,res){
@@ -113,12 +113,12 @@ app.get("/getByDOB/:dob",function(req,res){
         }
     })
     if(result.length==0){
-        res.send("No contact with this dob");
+        res.send({"Response":"No contact with this dob"});
     }
     res.send(result);
 })
 
 
 app.listen(8082,()=>{
-    console.log("win on skill backend at port 8082");
+    console.log("Phone-Book-Web-App at port 8082");
 })
