@@ -15,7 +15,6 @@ export default class Contact extends Component{
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log("ionfbe");
     }
     render(){
         console.log("info");

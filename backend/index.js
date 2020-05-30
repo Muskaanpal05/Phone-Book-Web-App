@@ -68,6 +68,7 @@ app.get("/all",(req,res)=>{
 
 app.get("/getByName/:name",(req,res)=>{
     console.log("getting data by name");
+    console.log(req.params.name);
     var result=[];
     data.map(d => {
         if(d.name == req.params.name)
@@ -75,9 +76,9 @@ app.get("/getByName/:name",(req,res)=>{
             result.push(d);
         }
     })
-    if(result.length==0){
-        res.send({"Response":"No contact with this name"});
-    }
+    // if(result.length==0){
+    //     res.send({"Response":"No contact with this name"});
+    // }
     res.send(result);
 })
 
@@ -91,7 +92,8 @@ app.get("/getByEmail/:email",(req,res)=>{
         })
 
     })
-    res.send({"Response":"No contact with this email"});
+    // res.send({"Response":"No contact with this email"});
+    res.send("EMPTY");
 })
 
 app.get("/getByContact/:contact",(req,res)=>{
@@ -104,7 +106,8 @@ app.get("/getByContact/:contact",(req,res)=>{
         })
 
     })
-    res.send({"Response":"No contact with this contact number"});
+    // res.send({"Response":"No contact with this contact number"});
+    res.send("EMPTY");
 })
 
 app.get("/getByDOB/:dob",(req,res)=>{
@@ -116,9 +119,9 @@ app.get("/getByDOB/:dob",(req,res)=>{
             result.push(d);
         }
     })
-    if(result.length==0){
-        res.send({"Response":"No contact with this dob"});
-    }
+    // if(result.length==0){
+    //     res.send({"Response":"No contact with this dob"});
+    // }
     res.send(result);
 })
 
