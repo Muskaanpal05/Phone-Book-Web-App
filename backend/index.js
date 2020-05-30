@@ -15,6 +15,30 @@ var data = [
             "9876543210"
         ],
         "dob": "5/10/1999"
+    },
+    {
+        "name": "nitin",
+        "email": [
+            "khj@gmail.com",
+            "lky@gmail.com"
+        ],
+        "contact": [
+            "7865956765",
+            "9876546510"
+        ],
+        "dob": "6/2/1999"
+    },
+    {
+        "name": "muskaan",
+        "email": [
+            "kth@gmail.com",
+            "lry@gmail.com"
+        ],
+        "contact": [
+            "7865336765",
+            "9876534510"
+        ],
+        "dob": "6/2/1999"
     }
 ]
 
@@ -36,6 +60,18 @@ app.get("",function(req,res){
 app.get("/all",function(req,res){
     console.log("getting all data");
     res.send(data);
+})
+
+app.get("/getByName/:name",function(req,res){
+    console.log("getting all data");
+    const result = data.map(d => {
+        if(d.name == req.params.name)
+        {
+            return d;
+        }
+
+    })
+    res.send(result);
 })
 
 
