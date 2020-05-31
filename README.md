@@ -8,6 +8,8 @@
 
 4. Edit a contact(Add a new email, contact number).
 
+5. Implemented some css in the background.
+
 
 PENDING:
 
