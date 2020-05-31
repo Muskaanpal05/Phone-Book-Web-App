@@ -6,6 +6,8 @@
 
 3. Display contacts (but with single email id and contact).
 
+4. Edit a contact(Add a new email, contact number).
+
 PENDING:
 
 1. Optimal Search.
@@ -16,5 +18,6 @@ PENDING:
 
 4. Display complete contact.
 
-5. Edit a contact(Add a new email, contact number).
+
+
 
