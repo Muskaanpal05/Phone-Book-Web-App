@@ -137,14 +137,18 @@ app.post("/add",function(req,res){
     var flag=0;
 
     data.map(d => {
-        if(d.name==req.body.name){
-            flag=1;
-        }
+        // if(d.name==req.body.name){
+        //     flag=1;
+        // }
+
+        //check for duplicate email
         d.email.map(email => {
             if(email == req.body.email[0]){
                 flag=1;
             }
         })
+
+        //check for duplicate contact-number
         d.contact.map(c=>{
             if(c==req.body.contact[0]){
                 flag=1;
