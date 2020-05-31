@@ -152,13 +152,25 @@ class Main extends Component{
         //designing all contacts data
         var data= this.state.data;
         var result=data.map(d=>{
+            var e1= d.email;
+            var cn1=d.contact;
+            var e1r=e1.map(e=>{
+                return (
+                    <p>{e}  </p>
+                )
+            })
+            var cn1r=cn1.map(c=>{
+                return (
+                    <p>{c}  </p>
+                )
+            })
             return(
                 <Card>
                     <CardBody>
-                        <CardTitle>{d.name}</CardTitle>
-                        <CardText>{d.email[0]}</CardText>
-                        <CardText>{d.contact[0]}</CardText>
-                        <CardText>{d.dob}</CardText>
+                        <CardTitle>Name: {d.name}</CardTitle>
+                        <CardText>Emails: {e1r}</CardText>
+                        <CardText>Contact-Numbers: {cn1r}</CardText>
+                        <CardText>DOB: {d.dob}</CardText>
                         <AddContactNumber addContactNumber={this.addContactNumber} d={d} />
                         <AddEmail addEmail={this.addEmail} d={d}/>
                         <CardText>-----------------------</CardText>
@@ -170,13 +182,27 @@ class Main extends Component{
         //designing searched contact's data
         data=this.state.searchData;
         var searchedData=data.map(d=>{
+            var e1= d.email;
+            var cn1=d.contact;
+            var e1r=e1.map(e=>{
+                return (
+                    <p>{e}  </p>
+                )
+            })
+            var cn1r=cn1.map(c=>{
+                return (
+                    <p>{c}  </p>
+                )
+            })
             return(
                 <Card>
                     <CardBody>
-                        <CardTitle>{d.name}</CardTitle>
-                        <CardText>{d.email[0]}</CardText>
-                        <CardText>{d.contact[0]}</CardText>
-                        <CardText>{d.dob}</CardText>
+                        <CardTitle>Name: {d.name}</CardTitle>
+                        <CardText>Emails: {e1r}</CardText>
+                        <CardText>Contact-Numbers: {cn1r}</CardText>
+                        <CardText>DOB: {d.dob}</CardText>
+                        <AddContactNumber addContactNumber={this.addContactNumber} d={d} />
+                        <AddEmail addEmail={this.addEmail} d={d}/>
                         <CardText>-----------------------</CardText>
                     </CardBody>
                 </Card>

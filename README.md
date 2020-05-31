@@ -4,9 +4,10 @@
 
 2. Search contact(if matches name,email or contact number).
 
-3. Display contacts (but with single email id and contact).
+3. Display contacts.
 
 4. Edit a contact(Add a new email, contact number).
+
 
 PENDING:
 
@@ -16,7 +17,7 @@ PENDING:
 
 3. Database implementation.
 
-4. Display complete contact.
+
 
 
 
