@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {Card, CardBody, CardText, CardTitle} from 'reactstrap';
+import {Card, CardBody, CardText, CardTitle, Button} from 'reactstrap';
 import Form from './Form.js';
 import Search from './Search.js';
+import AddContactNumber from './AddContactNumber.js';
+import AddEmail from './AddEmail.js';
 
 class Main extends Component{
     constructor(props){
@@ -103,17 +105,74 @@ class Main extends Component{
         })
     }
 
+    addEmail =(v,event)=>{
+        var newData={
+            val:v.val,
+            d:v.d.email[0]
+        }
+        fetch('http://localhost:8082/addEmail',{
+                method:"PUT",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(newData)
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            if(res.valid){
+                alert("Email Added");  
+            }
+            else{
+                alert("Duplicate email");
+            }
+        })
+    }
+
+    addContactNumber=(v,event)=>{
+        var newData={
+            val:v.val,
+            d:v.d.contact[0]
+        }
+        fetch('http://localhost:8082/addContactNumber',{
+                method:"PUT",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(newData)
+            })
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+                if(res.valid){
+                    alert("Contact number added");   
+                }
+                else{
+                    alert("Duplicate contact number");
+                }
+            })
+    }
+
     render(){
         //designing all contacts data
         var data= this.state.data;
         var result=data.map(d=>{
+            var e1= d.email;
+            var cn1=d.contact;
+            var e1r=e1.map(e=>{
+                return (
+                    <p>{e}  </p>
+                )
+            })
+            var cn1r=cn1.map(c=>{
+                return (
+                    <p>{c}  </p>
+                )
+            })
             return(
                 <Card>
                     <CardBody>
-                        <CardTitle>{d.name}</CardTitle>
-                        <CardText>{d.email[0]}</CardText>
-                        <CardText>{d.contact[0]}</CardText>
-                        <CardText>{d.dob}</CardText>
+                        <CardTitle>Name: {d.name}</CardTitle>
+                        <CardText>Emails: {e1r}</CardText>
+                        <CardText>Contact-Numbers: {cn1r}</CardText>
+                        <CardText>DOB: {d.dob}</CardText>
+                        <AddContactNumber addContactNumber={this.addContactNumber} d={d} />
+                        <AddEmail addEmail={this.addEmail} d={d}/>
                         <CardText>-----------------------</CardText>
                     </CardBody>
                 </Card>
@@ -123,13 +182,27 @@ class Main extends Component{
         //designing searched contact's data
         data=this.state.searchData;
         var searchedData=data.map(d=>{
+            var e1= d.email;
+            var cn1=d.contact;
+            var e1r=e1.map(e=>{
+                return (
+                    <p>{e}  </p>
+                )
+            })
+            var cn1r=cn1.map(c=>{
+                return (
+                    <p>{c}  </p>
+                )
+            })
             return(
                 <Card>
                     <CardBody>
-                        <CardTitle>{d.name}</CardTitle>
-                        <CardText>{d.email[0]}</CardText>
-                        <CardText>{d.contact[0]}</CardText>
-                        <CardText>{d.dob}</CardText>
+                        <CardTitle>Name: {d.name}</CardTitle>
+                        <CardText>Emails: {e1r}</CardText>
+                        <CardText>Contact-Numbers: {cn1r}</CardText>
+                        <CardText>DOB: {d.dob}</CardText>
+                        <AddContactNumber addContactNumber={this.addContactNumber} d={d} />
+                        <AddEmail addEmail={this.addEmail} d={d}/>
                         <CardText>-----------------------</CardText>
                     </CardBody>
                 </Card>

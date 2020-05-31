@@ -134,11 +134,93 @@ app.get("/getByDOB/:dob",(req,res)=>{
 
 //add new contact (validations not implemented yet)
 app.post("/add",function(req,res){
-    console.log(req.body);
-    data.push(req.body);
-    res.send({valid:"yes"});
+    var flag=0;
+
+    data.map(d => {
+        // if(d.name==req.body.name){
+        //     flag=1;
+        // }
+
+        //check for duplicate email
+        d.email.map(email => {
+            if(email == req.body.email[0]){
+                flag=1;
+            }
+        })
+
+        //check for duplicate contact-number
+        d.contact.map(c=>{
+            if(c==req.body.contact[0]){
+                flag=1;
+            }
+        })
+    })
+
+    if(flag==1){
+        res.send("ERROR");
+    }
+    else{
+        console.log(req.body);
+        data.push(req.body);
+        res.send({valid:"yes"});
+    }
 })
 
+app.put("/addEmail", function(req,res){
+    var flag = 0;
+    console.log("In add email");
+    data.map(d => {
+        return d.email.map(email => {
+            if(email == req.body.val){
+                console.log("Email already exist");
+                flag=1;
+            }
+        })
+
+    })
+    if(flag==1){
+        res.send("ERROR")
+    }else{
+        console.log("Adding new Email");
+        data.map(d => {
+            return d.email.map(email => {
+                if(email == req.body.d){
+                    d.email.push(req.body.val);
+                }
+            })
+
+        })
+        res.send({valid:"yes"});
+    }
+   
+})
+
+app.put("/addContactNumber", function(req,res){
+    var flag = 0;
+    console.log("In add contact");
+    data.map(d => {
+        return d.contact.map(contactNumber => {
+            if(contactNumber == req.body.val){
+                flag=1;
+            }
+        })
+
+    })
+    if(flag==1){
+        res.send("ERROR")
+    }else{
+        data.map(d => {
+            return d.contact.map(contactNumber => {
+                if(contactNumber == req.body.d){
+                    d.contact.push(req.body.val);
+                }
+            })
+
+        })
+        res.send({valid:"yes"});
+    }
+    
+})
 
 app.listen(8082,()=>{
     console.log("Phone-Book-Web-App at port 8082");
