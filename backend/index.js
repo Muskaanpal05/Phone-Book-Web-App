@@ -134,9 +134,32 @@ app.get("/getByDOB/:dob",(req,res)=>{
 
 //add new contact (validations not implemented yet)
 app.post("/add",function(req,res){
-    console.log(req.body);
-    data.push(req.body);
-    res.send({valid:"yes"});
+    var flag=0;
+
+    data.map(d => {
+        if(d.name==req.body.name){
+            flag=1;
+        }
+        d.email.map(email => {
+            if(email == req.body.email[0]){
+                flag=1;
+            }
+        })
+        d.contact.map(c=>{
+            if(c==req.body.contact[0]){
+                flag=1;
+            }
+        })
+    })
+
+    if(flag==1){
+        res.send("ERROR");
+    }
+    else{
+        console.log(req.body);
+        data.push(req.body);
+        res.send({valid:"yes"});
+    }
 })
 
 app.put("/addEmail", function(req,res){
